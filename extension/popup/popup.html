@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory OS</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Settings view (hidden by default) -->
+    <div id="settings-view" style="display: none">
+      <div class="header">
+        <h1>Settings</h1>
+        <button id="back-btn" class="icon-btn" title="Back">&larr;</button>
+      </div>
+      <div class="form-group">
+        <label>API URL</label>
+        <input type="text" id="api-url" placeholder="http://localhost:3000" />
+      </div>
+      <div class="form-group">
+        <label>API Key</label>
+        <input type="text" id="api-key" placeholder="Your API key" />
+      </div>
+      <button id="save-settings" class="btn primary">Save Settings</button>
+    </div>
+
+    <!-- Main view -->
+    <div id="main-view">
+      <div class="header">
+        <h1>Memory OS</h1>
+        <button id="settings-btn" class="icon-btn" title="Settings">&#9881;</button>
+      </div>
+
+      <div id="page-info">
+        <div class="page-title" id="page-title">Loading...</div>
+        <div class="page-domain" id="page-domain"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+        <input type="text" id="tags-input" placeholder="tag1, tag2, tag3" />
+      </div>
+
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea id="notes-input" rows="2" placeholder="Add notes..."></textarea>
+      </div>
+
+      <div id="selected-text-group" class="form-group" style="display: none">
+        <label>Selected Text</label>
+        <div id="selected-text" class="selected-text"></div>
+      </div>
+
+      <button id="save-btn" class="btn primary">Save Page</button>
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
