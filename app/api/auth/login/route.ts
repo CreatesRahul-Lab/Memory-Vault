@@ -5,7 +5,8 @@ import User from "@/models/User";
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    const { email: rawEmail, password } = await request.json();
+    const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : "";
 
     if (!email || !password) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
@@ -29,7 +30,8 @@ export async function POST(request: Request) {
     });
 
     return response;
-  } catch {
+  } catch (error) {
+    console.error("Login failed:", error);
     return NextResponse.json({ error: "Login failed" }, { status: 500 });
   }
 }

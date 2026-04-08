@@ -1,15 +1,7 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// ─── SMTP Configuration ───────────────────────────────────────────────────────
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.gmail.com",
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: process.env.SMTP_SECURE === "true",
-  auth: {
-    user: process.env.SMTP_USER || "",
-    pass: process.env.SMTP_PASS || "",
-  },
-});
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 const FROM_NAME = process.env.EMAIL_FROM_NAME || "Memory OS";
 const FROM_EMAIL = process.env.EMAIL_FROM || "noreply@memoryos.app";
@@ -141,14 +133,23 @@ export interface SendEmailOptions {
 }
 
 export async function sendEmail(options: SendEmailOptions) {
-  const info = await transporter.sendMail({
+  if (!resend) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+
+  const { data, error } = await resend.emails.send({
     from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
     to: options.to,
     subject: options.subject,
     html: options.html,
-    text: options.text || "",
+    text: options.text,
   });
-  return info;
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 }
 
 export { APP_URL, FROM_NAME };

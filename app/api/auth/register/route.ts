@@ -7,7 +7,8 @@ import { welcomeEmail } from "@/lib/email-templates";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password } = await request.json();
+    const { name, email: rawEmail, password } = await request.json();
+    const email = typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : "";
 
     if (!name || !email || !password) {
       return NextResponse.json({ error: "Name, email, and password are required" }, { status: 400 });
@@ -42,7 +43,8 @@ export async function POST(request: Request) {
     );
 
     return response;
-  } catch {
+  } catch (error) {
+    console.error("Registration failed:", error);
     return NextResponse.json({ error: "Registration failed" }, { status: 500 });
   }
 }
