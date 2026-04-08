@@ -37,6 +37,10 @@
         <div class="page-domain" id="page-domain"></div>
       </div>
 
+      <div id="dupe-warning" class="dupe-warning" style="display: none">
+        <span>&#9888;</span> Possible duplicate found
+      </div>
+
       <div class="form-group">
         <label>Tags</label>
         <input type="text" id="tags-input" placeholder="tag1, tag2, tag3" />
@@ -48,8 +52,28 @@
       </div>
 
       <div id="selected-text-group" class="form-group" style="display: none">
-        <label>Selected Text</label>
+        <label>Selected Text / Highlight</label>
         <div id="selected-text" class="selected-text"></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" style="flex:1">
+          <label>Collection</label>
+          <select id="collection-select">
+            <option value="">None</option>
+          </select>
+        </div>
+        <div class="form-group" style="flex:1">
+          <label>Options</label>
+          <div class="option-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="capture-full" /> Full page
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="mark-task" /> Task
+            </label>
+          </div>
+        </div>
       </div>
 
       <button id="save-btn" class="btn primary">Save Page</button>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MemoryOS" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MemoryOS.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FF1A1A2E</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.MemoryOS</item>
+    </style>
+</resources>
