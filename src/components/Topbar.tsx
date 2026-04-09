@@ -36,13 +36,13 @@ export default function Topbar() {
   const handleSignOut = async () => {
     localStorage.removeItem("mos_userName");
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/login");
+    router.push("/");
   };
 
   const firstName = name.split(" ")[0] || name;
 
   const navItems = [
-    { href: "/", label: "Dashboard" },
+    { href: "/dashboard", label: "Dashboard" },
     { href: "/capture", label: "Capture" },
     { href: "/collections", label: "Collections" },
     { href: "/teams", label: "Teams" },

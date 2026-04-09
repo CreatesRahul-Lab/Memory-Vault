@@ -86,7 +86,7 @@ export default function ItemDetailPage() {
     try {
       const res = await fetch(`/api/items/${id}`);
       if (res.status === 401) { router.push("/login"); return; }
-      if (res.status === 404) { router.push("/"); return; }
+      if (res.status === 404) { router.push("/dashboard"); return; }
       const data = await res.json();
       setItem(data);
       setEditTitle(data.title);
@@ -204,7 +204,7 @@ export default function ItemDetailPage() {
     if (!confirm("Delete this item? This cannot be undone.")) return;
     await fetch(`/api/items/${id}`, { method: "DELETE" });
     showToast("Item deleted", "success");
-    router.push("/");
+    router.push("/dashboard");
   };
 
   const addComment = async () => {
@@ -281,7 +281,7 @@ export default function ItemDetailPage() {
       <div className="main-container">
         {/* Breadcrumb */}
         <div className="detail-breadcrumb">
-          <button className="btn btn-secondary btn-sm" onClick={() => router.push("/")}>
+          <button className="btn btn-secondary btn-sm" onClick={() => router.push("/dashboard")}>
             &larr; Dashboard
           </button>
           {item.collection && (
